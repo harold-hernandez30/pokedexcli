@@ -4,41 +4,16 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"pokedexcli/internal/commands"
 	"strings"
 )
-
-var commandsMap = map[string]cliCommand{
-	"exit": {
-		name: "exit",
-		description: "Exit the Pokedex",
-		callback: commandExit,
-	},
-	"help": {
-		name: "help",
-		description: "Displays a help message",
-		callback: commandHelp,
-	},
-}
-
-var registry = map[string]cliCommand{}
-
-type cliCommand struct {
-	name string
-	description string
-	callback func() error
-}
-
-func registerCommand(cmd string) {
-	registry[cmd] = commandsMap[cmd]
-}
-
 
 func main() {
 	
 	scanner := bufio.NewScanner(os.Stdin)
 		
-	registerCommand("exit")
-	registerCommand("help")
+	commands.RegisterCommand("exit")
+	commands.RegisterCommand("help")
 
 	for {
 		fmt.Print("Pokedex > ")
@@ -46,13 +21,13 @@ func main() {
 		userInput := scanner.Text()
 
 		if res {
-			commands := strings.Fields(strings.ToLower(userInput))
-			command := commands[0]
+			commandsSplice := strings.Fields(strings.ToLower(userInput))
+			command := commandsSplice[0]
 
-			cli, ok := commandsMap[command]
+			cli, ok := commands.GetCliCommand(command)
 
 			if ok {
-				err := cli.callback()
+				err := cli.Callback()
 				if err != nil {
 					fmt.Printf("Error found: %v", err)
 				}
@@ -62,22 +37,6 @@ func main() {
 
 		} 
 	}
-}
-
-func commandExit() error {
-	defer os.Exit(0)
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	return nil
-}
-
-func commandHelp() error {
-	fmt.Println("Welcome to the Pokedex!")
-	fmt.Print("Usage:\n\n")
-
-	for command, obj := range registry {
-		fmt.Printf("%v: %v\n", command, obj.description)
-	}
-	return nil
 }
 
 
