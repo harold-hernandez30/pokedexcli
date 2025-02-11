@@ -28,18 +28,22 @@ type cliCommand struct {
 	callback func() error
 }
 
+func registerCommand(cmd string) {
+	registry[cmd] = commandsMap[cmd]
+}
+
 
 func main() {
 	
 	scanner := bufio.NewScanner(os.Stdin)
+		
+	registerCommand("exit")
+	registerCommand("help")
 
 	for {
 		fmt.Print("Pokedex > ")
 		res := scanner.Scan()
 		userInput := scanner.Text()
-
-		registry["exit"] = commandsMap["exit"]
-		registry["help"] = commandsMap["help"]
 
 		if res {
 			commands := strings.Fields(strings.ToLower(userInput))
