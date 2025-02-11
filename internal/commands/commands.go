@@ -16,5 +16,15 @@ var commandsMap = map[string]cliCommand{
 		description: "Displays a help message",
 		Callback: commandHelp,
 	},
+	"map": {
+		name: "map",
+		description: "Fetches the next list of poke location areas",
+		Callback: mapCommand,
+	},
+	"mapb": {
+		name: "mapb",
+		description: "Fetches the previous list of poke location areas",
+		Callback: mapbCommand,
+	},
 }
 

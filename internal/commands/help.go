@@ -5,7 +5,7 @@ import (
 )
 
 
-func commandHelp() error {
+func commandHelp(cliConfig *Config) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Print("Usage:\n\n")
 

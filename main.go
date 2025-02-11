@@ -14,7 +14,13 @@ func main() {
 		
 	commands.RegisterCommand("exit")
 	commands.RegisterCommand("help")
+	commands.RegisterCommand("map")
+	commands.RegisterCommand("mapb")
 
+	requestConfig := commands.Config{
+		Next: "",
+		Previous: "",
+	}
 	for {
 		fmt.Print("Pokedex > ")
 		res := scanner.Scan()
@@ -27,7 +33,7 @@ func main() {
 			cli, ok := commands.GetCliCommand(command)
 
 			if ok {
-				err := cli.Callback()
+				err := cli.Callback(&requestConfig)
 				if err != nil {
 					fmt.Printf("Error found: %v", err)
 				}
