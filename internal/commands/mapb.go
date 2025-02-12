@@ -8,10 +8,10 @@ import (
 func mapbCommand(cmdConfig *Config) error {
 
 	if len(cmdConfig.Previous) == 0 {
-		cmdConfig.Previous = "https://pokeapi.co/api/v2/location-area/"
+		cmdConfig.Previous = "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20"
 	}
 
-	pokeAreas, err := pokemonapi.FetchLocationArea(cmdConfig.Previous)
+	pokeAreas, err := pokemonapi.FetchLocationArea(cmdConfig.Previous, cmdConfig.PokeCache)
 
 	if err == nil {
 		if len(pokeAreas.Previous) > 0 {

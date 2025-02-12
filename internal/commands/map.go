@@ -5,14 +5,13 @@ import (
 	"pokedexcli/internal/pokemonapi"
 )
 
-
 func mapCommand(cmdConfig *Config) error {
 
 	if len(cmdConfig.Next) == 0 {
-		cmdConfig.Next = "https://pokeapi.co/api/v2/location-area/"
+		cmdConfig.Next = "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20"
 	}
 
-	pokeAreas, err := pokemonapi.FetchLocationArea(cmdConfig.Next)
+	pokeAreas, err := pokemonapi.FetchLocationArea(cmdConfig.Next, cmdConfig.PokeCache)
 
 	if err == nil {
 		if len(pokeAreas.Next) > 0 {

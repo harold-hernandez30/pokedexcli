@@ -5,22 +5,26 @@ import (
 	"fmt"
 	"os"
 	"pokedexcli/internal/commands"
+	"pokedexcli/internal/pokecache"
 	"strings"
+	"time"
 )
 
 func main() {
-	
+
 	scanner := bufio.NewScanner(os.Stdin)
-		
+
 	commands.RegisterCommand("exit")
 	commands.RegisterCommand("help")
 	commands.RegisterCommand("map")
 	commands.RegisterCommand("mapb")
 
 	requestConfig := commands.Config{
-		Next: "",
-		Previous: "",
+		Next:      "",
+		Previous:  "",
+		PokeCache: pokecache.NewCache(60 * time.Second),
 	}
+
 	for {
 		fmt.Print("Pokedex > ")
 		res := scanner.Scan()
@@ -41,10 +45,9 @@ func main() {
 				fmt.Println("Unknown command")
 			}
 
-		} 
+		}
 	}
 }
-
 
 func cleanInput(text string) []string {
 	input := []string{}
@@ -56,5 +59,5 @@ func cleanInput(text string) []string {
 		}
 	}
 
-	return  input
+	return input
 }
