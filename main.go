@@ -22,7 +22,7 @@ func main() {
 	requestConfig := commands.Config{
 		Next:      "",
 		Previous:  "",
-		PokeCache: pokecache.NewCache(60 * time.Second),
+		PokeCache: pokecache.NewCache(60*time.Second, true),
 	}
 
 	for {

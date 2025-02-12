@@ -15,9 +15,11 @@ type cachEntry struct {
 	val       []byte
 }
 
-func NewCache(interval time.Duration) *Cache {
+func NewCache(interval time.Duration, enableReap bool) *Cache {
 	newCache := Cache{}
 	newCache.cacheEntries = make(map[string]cachEntry)
-	go reapLoop(&newCache, interval)
+	if enableReap {
+		go reapLoop(&newCache, interval)
+	}
 	return &newCache
 }
