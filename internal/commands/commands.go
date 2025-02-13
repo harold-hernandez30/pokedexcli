@@ -7,24 +7,28 @@ func GetCliCommand(command string) (cliCommand, bool) {
 
 var commandsMap = map[string]cliCommand{
 	"exit": {
-		name: "exit",
+		name:        "exit",
 		description: "Exit the Pokedex",
-		Callback: commandExit,
+		Callback:    commandExit,
 	},
 	"help": {
-		name: "help",
+		name:        "help",
 		description: "Displays a help message",
-		Callback: commandHelp,
+		Callback:    commandHelp,
 	},
 	"map": {
-		name: "map",
+		name:        "map",
 		description: "Fetches the next list of poke location areas",
-		Callback: mapCommand,
+		Callback:    mapCommand,
 	},
 	"mapb": {
-		name: "mapb",
+		name:        "mapb",
 		description: "Fetches the previous list of poke location areas",
-		Callback: mapbCommand,
+		Callback:    mapbCommand,
+	},
+	"explore": {
+		name:        "explore",
+		description: "Fetches pokemons found in a given location area",
+		Callback:    exploreCommand,
 	},
 }
-

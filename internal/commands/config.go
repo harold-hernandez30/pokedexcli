@@ -5,7 +5,8 @@ import (
 )
 
 type Config struct {
-	Next      string
-	Previous  string
-	PokeCache *pokecache.Cache
+	Next                string
+	Previous            string
+	CurrentLocationArea string
+	PokeCache           *pokecache.Cache
 }

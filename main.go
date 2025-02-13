@@ -18,11 +18,13 @@ func main() {
 	commands.RegisterCommand("help")
 	commands.RegisterCommand("map")
 	commands.RegisterCommand("mapb")
+	commands.RegisterCommand("explore")
 
 	requestConfig := commands.Config{
-		Next:      "",
-		Previous:  "",
-		PokeCache: pokecache.NewCache(60*time.Second, true),
+		Next:                "",
+		Previous:            "",
+		PokeCache:           pokecache.NewCache(60*time.Second, true),
+		CurrentLocationArea: "",
 	}
 
 	for {
@@ -33,6 +35,10 @@ func main() {
 		if res {
 			commandsSplice := strings.Fields(strings.ToLower(userInput))
 			command := commandsSplice[0]
+
+			if command == "explore" && len(commandsSplice) > 1 {
+				requestConfig.CurrentLocationArea = commandsSplice[1]
+			}
 
 			cli, ok := commands.GetCliCommand(command)
 
