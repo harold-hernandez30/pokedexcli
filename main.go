@@ -6,6 +6,7 @@ import (
 	"os"
 	"pokedexcli/internal/commands"
 	"pokedexcli/internal/pokecache"
+	"pokedexcli/internal/pokedex"
 	"strings"
 	"time"
 )
@@ -25,6 +26,8 @@ func main() {
 		Previous:            "",
 		PokeCache:           pokecache.NewCache(60*time.Second, true),
 		CurrentLocationArea: "",
+		PokemonToCatch:      "",
+		Pokedex:             pokedex.NewPokedex(),
 	}
 
 	for {
@@ -38,6 +41,14 @@ func main() {
 
 			if command == "explore" && len(commandsSplice) > 1 {
 				requestConfig.CurrentLocationArea = commandsSplice[1]
+			}
+
+			if command == "catch" && len(commandsSplice) > 1 {
+				requestConfig.PokemonToCatch = commandsSplice[1]
+			}
+
+			if command == "inspect" && len(commandsSplice) > 1 {
+				requestConfig.PokemonToInspect = commandsSplice[1]
 			}
 
 			cli, ok := commands.GetCliCommand(command)

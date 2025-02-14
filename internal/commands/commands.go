@@ -31,4 +31,14 @@ var commandsMap = map[string]cliCommand{
 		description: "Fetches pokemons found in a given location area",
 		Callback:    exploreCommand,
 	},
+	"catch": {
+		name:        "catch",
+		description: "Catch a pokemon, if you can...",
+		Callback:    catchCommand,
+	},
+	"inspect": {
+		name:        "inspect",
+		description: "Print caught pokemon",
+		Callback:    inspectCommand,
+	},
 }
