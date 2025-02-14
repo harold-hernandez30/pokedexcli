@@ -41,4 +41,9 @@ var commandsMap = map[string]cliCommand{
 		description: "Print caught pokemon",
 		Callback:    inspectCommand,
 	},
+	"pokedex": {
+		name:        "pokedex",
+		description: "Print Pokedex",
+		Callback:    displayPokedexCommand,
+	},
 }
